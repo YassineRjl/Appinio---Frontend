@@ -8,19 +8,11 @@ export type Content = {
   source: string;
   isoLang: string;
   created: string;
-  insights: InsightType[];
-  summaries: SummaryType[];
+  insights: AssetType[];
+  summaries: AssetType[];
+  quotes: AssetType[];
 };
-export type InsightType = {
-  id: string;
-  result?: string;
-  status: Status;
-  contentId: string;
-  created: string;
-  Content: Content;
-};
-
-export type SummaryType = {
+type AssetType = {
   id: string;
   result?: string;
   status: Status;

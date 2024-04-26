@@ -18,6 +18,7 @@ describe("AI Application", () => {
       data: {
         summaries: [{ result: "Summary text", status: "ready" }],
         insights: [{ result: "Insights text", status: "ready" }],
+        quotes: [{ result: "Quotes text", status: "ready" }],
       },
     });
 
@@ -41,6 +42,12 @@ describe("AI Application", () => {
     await waitFor(() => {
       expect(
         screen.getByRole("button", { name: "Summary" })
+      ).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Quotes" })
       ).toBeInTheDocument();
     });
 
@@ -90,6 +97,7 @@ describe("AI Application", () => {
       data: {
         summaries: [{ result: "Summary text", status: "ready" }],
         insights: [{ result: "Insights text", status: "ready" }],
+        quotes: [{ result: "Quotes text", status: "ready" }],
       },
     });
 
@@ -158,6 +166,7 @@ describe("AI Application", () => {
       data: {
         summaries: [{ result: "Summary text", status: "ready" }],
         insights: [{ result: "Insights text", status: "ready" }],
+        quotes: [{ result: "Quotes text", status: "ready" }],
       },
     });
 

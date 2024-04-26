@@ -16,8 +16,10 @@ export const pollContent = async (
   if (
     content.insights.length === 0 ||
     content.summaries.length === 0 ||
+    content.quotes.length === 0 ||
     content.insights[0].status === Status.writing ||
-    content.summaries[0].status === Status.writing
+    content.summaries[0].status === Status.writing ||
+    content.quotes[0].status === Status.writing
   )
     setTimeout(() => pollContent(contentId, setContent), 1000);
 };

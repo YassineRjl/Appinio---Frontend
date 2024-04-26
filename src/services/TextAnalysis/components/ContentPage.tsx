@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { LoadingScreen } from "../../../shared/Components/LoadingScreen";
+import { Tab, TabGroup } from "../../../shared/Components/Tab";
+import { ArrowRightIcon } from "../../../shared/Icons/ArrowRight";
 import { Content } from "../../../types";
 import { pollContent } from "../../../utils";
-import { Tab, TabGroup } from "../../../shared/Components/Tab";
-import { SummaryTab } from "./SummaryTab";
-import { InsightsTab } from "./InsightsTab";
-import { ArrowRightIcon } from "../../../shared/Icons/ArrowRight";
 import { ASSETS_IDS } from "../../../utils/constants";
-import { LoadingScreen } from "../../../shared/Components/LoadingScreen";
+import { InsightsTab } from "./InsightsTab";
+import { QuotesTab } from "./QuotesTab";
+import { SummaryTab } from "./SummaryTab";
 
 export const ContentPage = () => {
   const navigate = useNavigate();
@@ -45,6 +46,11 @@ export const ContentPage = () => {
             name="Summary"
             assetId={ASSETS_IDS.SUMMARY}
             component={() => <SummaryTab content={content} />}
+          />
+          <Tab
+            name="Quotes"
+            assetId={ASSETS_IDS.QUOTES}
+            component={() => <QuotesTab content={content} />}
           />
           <Tab
             name="Insights"

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { writeContent } from "../../../api";
 import { LanguageDropdown } from "./LanguageDropdown";
+import { useState } from "react";
 
 const validationSchema = Yup.object().shape({
   text: Yup.string().required("Paste your text to transform it"),
@@ -12,14 +13,12 @@ const validationSchema = Yup.object().shape({
 export const TextInputPage = () => {
   const navigate = useNavigate();
 
-  const handleSubmit = async ({
-    text: source,
-    isoLang,
-  }: {
-    text: string;
-    isoLang: string;
-  }) => {
+  const handleSubmit = async (
+    { text: source, isoLang }: { text: string; isoLang: string },
+    setSubmiting: (submiting: boolean) => void
+  ) => {
     try {
+      setSubmiting(true);
       const { data } = await writeContent({
         isoLang,
         source,
@@ -29,6 +28,8 @@ export const TextInputPage = () => {
       const errors = error?.response?.data.errors ?? [];
       if (errors.length > 0) alert(errors[0].msg);
       else alert("An error occurred");
+    } finally {
+      setSubmiting(false);
     }
   };
 
@@ -48,9 +49,11 @@ export const TextInputPage = () => {
           <Formik
             initialValues={{ text: "", isoLang: "en" }}
             validationSchema={validationSchema}
-            onSubmit={handleSubmit}
+            onSubmit={(data, { setSubmitting }) =>
+              handleSubmit(data, setSubmitting)
+            }
           >
-            {({ handleChange, setFieldValue }) => (
+            {({ handleChange, setFieldValue, isSubmitting }) => (
               <Form className="space-y-10">
                 <LanguageDropdown
                   onLanguageChange={(lang) => setFieldValue("isoLang", lang)}
@@ -72,8 +75,9 @@ export const TextInputPage = () => {
                   />
                 </div>
                 <button
-                  className="mt-5 w-full bg-[#FF5698] rounded-lg text-sm text-white font-semibold py-2 px-4 focus:outline-none focus:shadow-outline "
+                  className="mt-5 w-full bg-[#FF5698] disabled:bg-gray-600 rounded-lg text-sm text-white font-semibold py-2 px-4 focus:outline-none focus:shadow-outline "
                   type="submit"
+                  disabled={isSubmitting}
                 >
                   Upload
                 </button>

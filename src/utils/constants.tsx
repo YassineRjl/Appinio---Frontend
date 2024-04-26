@@ -15,6 +15,7 @@ import {
 export const ASSETS_IDS = {
   SUMMARY: "summary",
   INSIGHTS: "insights",
+  QUOTES: "quotes",
 };
 
 export const supportedLanguages = [
