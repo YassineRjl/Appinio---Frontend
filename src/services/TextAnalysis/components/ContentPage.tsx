@@ -33,6 +33,7 @@ export const ContentPage = () => {
 
   return (
     <div className="py-5">
+      {/* alternatively, instead of a button, we can use Link by react-router-dom as well */}
       <button
         className="p-3 rounded-full shadow ml-5"
         onClick={() => navigate("/")}

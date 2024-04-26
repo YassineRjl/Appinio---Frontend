@@ -39,9 +39,9 @@ export const TabGroup = ({
     <div className={className}>
       <div
         className={classNames(
-          `relative flex justify-start items-center rounded-lg border border-[#D1D1DB] w-full`,
+          `flex justify-start items-center rounded-lg border border-[#D1D1DB] w-full`,
           {
-            "sticky -top-[1px] bg-white z-10": sticky,
+            "sticky -top-[1px] bg-white": sticky,
           }
         )}
       >

@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { writeContent } from "../../../api";
 import { LanguageDropdown } from "./LanguageDropdown";
-import { useState } from "react";
 
 const validationSchema = Yup.object().shape({
-  text: Yup.string().required("Paste your text to transform it"),
+  text: Yup.string()
+    .required("Paste your text to transform it")
+    .min(300, "Text must be at least 300 characters"),
   isoLang: Yup.string().required("Select a language"),
 });
 
@@ -35,8 +36,8 @@ export const TextInputPage = () => {
 
   return (
     <div className="flex justify-center items-center py-10">
-      <div className="w-full max-w-2xl  shadow p-8 rounded-lg">
-        <div className="w-full text-center space-y-3">
+      <div className="w-full max-w-2xl shadow p-8 rounded-lg space-y-20">
+        <div className="text-center space-y-3">
           <h2 className="text-lg leading-8 font-semibold">
             Upload Source Material
           </h2>
@@ -45,7 +46,7 @@ export const TextInputPage = () => {
             from.
           </p>
         </div>
-        <div className="mt-20">
+        <div>
           <Formik
             initialValues={{ text: "", isoLang: "en" }}
             validationSchema={validationSchema}

@@ -6,7 +6,6 @@ module.exports = {
       colors: {},
       fontFamily: {
         inter: ["Inter", "Helvetica", "Arial", "sans-serif"],
-        poppins: ["Poppins", "Inter", "Helvetica", "Arial", "sans-serif"],
       },
       fontSize: {
         10: "10px",
