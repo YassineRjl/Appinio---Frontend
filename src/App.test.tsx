@@ -33,7 +33,7 @@ describe("AI Application", () => {
         "Paste transcripts, articles and other text here"
       ),
       {
-        target: { value: "Sample text" },
+        target: { value: "Sample text".repeat(100) },
       }
     );
 
@@ -112,7 +112,7 @@ describe("AI Application", () => {
         "Paste transcripts, articles and other text here"
       ),
       {
-        target: { value: "Sample text" },
+        target: { value: "Sample text".repeat(100) },
       }
     );
     fireEvent.click(screen.getByText("Upload"));
@@ -146,7 +146,7 @@ describe("AI Application", () => {
         "Paste transcripts, articles and other text here"
       ),
       {
-        target: { value: "Sample text" },
+        target: { value: "Sample text".repeat(100) },
       }
     );
     fireEvent.click(screen.getByText("Upload"));
@@ -181,7 +181,7 @@ describe("AI Application", () => {
         "Paste transcripts, articles and other text here"
       ),
       {
-        target: { value: "Sample text" },
+        target: { value: "Sample text".repeat(100) },
       }
     );
     fireEvent.click(screen.getByText("Upload"));
