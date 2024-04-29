@@ -4,13 +4,17 @@ import { sanitize } from "dompurify";
 
 export const pollContent = async (
   contentId: string,
-  setContent: (content: Content) => void
+  setContent: React.Dispatch<React.SetStateAction<Content | undefined>>
 ) => {
   // query the content
   const { data: content } = await getContent(contentId);
 
   // store the latest state of the content
-  setContent(content);
+  setContent((prev) => {
+    // compare the previous state with the new state to avoid rerendering
+    if (JSON.stringify(prev) === JSON.stringify(content)) return prev;
+    return content;
+  });
 
   // poll the content until all assets are ready
   if (
@@ -21,7 +25,7 @@ export const pollContent = async (
     content.summaries[0].status === Status.writing ||
     content.quotes[0].status === Status.writing
   )
-    setTimeout(() => pollContent(contentId, setContent), 1000);
+    setTimeout(() => pollContent(contentId, setContent), 1200);
 };
 
 // Safely set innerHTML of a div element

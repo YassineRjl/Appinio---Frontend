@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { LoadingScreen } from "../../../shared/Components/LoadingScreen";
 import { Tab, TabGroup } from "../../../shared/Components/Tab";
 import { ArrowRightIcon } from "../../../shared/Icons/ArrowRight";
-import { Content } from "../../../types";
+import { Content, Status } from "../../../types";
 import { pollContent } from "../../../utils";
 import { ASSETS_IDS } from "../../../utils/constants";
-import { InsightsTab } from "./InsightsTab";
-import { QuotesTab } from "./QuotesTab";
-import { SummaryTab } from "./SummaryTab";
+import { TabContent } from "./TabContent";
 
 export const ContentPage = () => {
   const navigate = useNavigate();
@@ -46,17 +44,44 @@ export const ContentPage = () => {
           <Tab
             name="Summary"
             assetId={ASSETS_IDS.SUMMARY}
-            component={() => <SummaryTab content={content} />}
+            component={() => (
+              <TabContent
+                status={
+                  content.summaries.length === 0
+                    ? Status.writing
+                    : content.summaries[0].status
+                }
+                result={content.summaries[0]?.result ?? ""}
+              />
+            )}
           />
           <Tab
             name="Quotes"
             assetId={ASSETS_IDS.QUOTES}
-            component={() => <QuotesTab content={content} />}
+            component={() => (
+              <TabContent
+                status={
+                  content.quotes.length === 0
+                    ? Status.writing
+                    : content.quotes[0].status
+                }
+                result={content.quotes[0]?.result ?? ""}
+              />
+            )}
           />
           <Tab
             name="Insights"
             assetId={ASSETS_IDS.INSIGHTS}
-            component={() => <InsightsTab content={content} />}
+            component={() => (
+              <TabContent
+                status={
+                  content.insights.length === 0
+                    ? Status.writing
+                    : content.insights[0].status
+                }
+                result={content.insights[0]?.result ?? ""}
+              />
+            )}
           />
         </TabGroup>
       </div>
